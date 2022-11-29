@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { useMainStore } from '@/store/main';
-
-const mainStore = useMainStore();
-console.log('mainStore', mainStore);
+import Aside from './Aside.vue';
 </script>
 
 <template>
   <el-container>
-    <el-aside width="200px">{{ mainStore.version }}</el-aside>
+    <el-aside width="200px">
+      <Aside />
+    </el-aside>
     <el-container>
       <el-header>Header</el-header>
       <el-main>
