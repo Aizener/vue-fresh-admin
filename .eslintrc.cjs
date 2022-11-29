@@ -28,6 +28,7 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": ["off"],
         "vue/comment-directive": ["off"],
         "@typescript-eslint/no-explicit-any": ["off"],
-        "vue/multi-word-component-names": ["off"]
+        "vue/multi-word-component-names": ["off"],
+        "prefer-const": ["off"]
     }
 }

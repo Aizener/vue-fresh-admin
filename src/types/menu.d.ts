@@ -6,4 +6,4 @@ type MenuItem = {
   children?: Menu
 }
 
-type Menu = Array<MenuItem>;
+type Menu = Array<ExpandObject<MenuItem>>;

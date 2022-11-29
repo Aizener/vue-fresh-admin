@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useMainStore } from '@/store/main';
 import { RouteRecordRaw } from 'vue-router';
 import AsideMenu from './AsideMenu.vue';
 
@@ -6,6 +7,7 @@ const route = useRoute();
 const router = useRouter();
 const routes = router.getRoutes();
 const menuRoutes = routes.find(route => route.name === 'Layout')?.children;
+const mainStore = useMainStore();
 
 const activeMenu = $ref<string>(route.path);
 const getMenu = (routes: RouteRecordRaw[]): Menu => {
@@ -26,18 +28,22 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
       :unique-opened="true"
       :router="true"
       :default-active="activeMenu"
+      :collapse="mainStore.collapse"
     >
       <AsideMenu :menu="menu"></AsideMenu>
     </el-menu>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .aside {
-  width: 100%;
   height: 100%;
   .el-menu {
+    width: 200px;
     height: 100%;
+    &.el-menu--collapse {
+      width: auto;
+    }
   }
 }
 </style>

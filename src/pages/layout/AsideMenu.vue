@@ -32,9 +32,5 @@ const { menu } = defineProps<{
   </template>
 </template>
 
-<style lang="scss">
-.aside {
-  width: 100%;
-  height: 100%;
-}
+<style lang="scss" scoped>
 </style>

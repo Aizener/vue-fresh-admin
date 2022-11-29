@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/Home.vue'),
         meta: {
           title: '首页',
-          icon: Icons['Odometer']
+          icon: markRaw(Icons['Odometer'])
         }
       },
       {
@@ -22,7 +22,7 @@ const routes: RouteRecordRaw[] = [
         name: 'System',
         meta: {
           title: '系统设置',
-          icon: Icons['SwitchButton']
+          icon: markRaw(Icons['SwitchButton'])
         },
         redirect: '/system',
         children: [
@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('@/pages/system/PlatformSettings.vue'),
             meta: {
               title: '平台设置',
-              icon: Icons['Setting']
+              icon: markRaw(Icons['Setting'])
             }
           },
           {
@@ -41,7 +41,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('@/pages/system/RoleSettings.vue'),
             meta: {
               title: '角色设置',
-              icon: Icons['User']
+              icon: markRaw(Icons['User'])
             }
           }
         ]
