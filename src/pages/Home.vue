@@ -1,9 +1,49 @@
 <script setup lang="ts">
+import { useMainStore } from '@/store/main';
+import { echarts } from '@/utils/useEcharts';
+
+const mainStore = useMainStore();
 const trend = $ref([
   { color: 'rgb(224, 144, 120)', data: [21, 16, 79, 52, 62, 79, 28] },
   { color: 'rgb(220, 217, 234)', data: [13, 48, 39, 57, 54, 31, 81] },
   { color: 'rgb(24, 223, 190)', data: [21, 33, 34, 53, 63, 72, 23] },
 ]);
+
+onMounted(() => {
+  const charts = echarts.init(document.querySelector('#line-charts') as HTMLElement);
+  const lineStyle = {
+    shadowColor: 'rgba(0, 0, 0, .6)',
+    shadowBlur: 30
+  }
+  const options: ECOption = {
+    title: {
+      text: '后台图表信息',
+      textStyle: {
+        color: 'rgb(75, 64, 147)'
+      }
+    },
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    legend: {
+      show: true,
+    },
+    tooltip: {
+      show: true,
+      trigger: 'axis'
+    },
+    series: [
+      { data: [820, 932, 901, 934, 1290, 1330, 1320], type: 'line', smooth: true, name: '图例1', lineStyle  },
+      { data: [720, 932, 801, 534, 1290, 1530, 1120], type: 'line', smooth: true, name: '图例2', lineStyle },
+      { data: [710, 932, 601, 634, 1290, 1130, 1420], type: 'line', smooth: true, name: '图例3', lineStyle },
+    ]
+  };
+  charts.setOption(options);
+});
 </script>
 
 <template>
@@ -63,6 +103,7 @@ const trend = $ref([
       </div>
     </div>
   </div>
+
   <div class="trend">
     <div class="trend-item" v-for="(item, idx) in trend">
       <div class="left">
@@ -77,6 +118,53 @@ const trend = $ref([
         <Bar :color="item.color" :data="item.data" />
       </div>
     </div>
+  </div>
+
+  <div class="info">
+    <div class="info-site">
+      <div class="info-site--help">
+        <div class="info-site--icon">
+          <el-icon size="30px" color="rgb(107, 189, 217)"><QuestionFilled /></el-icon>
+        </div>
+        <p>帮助中心</p>
+        <span>
+          点击<span class="button">引导</span>将出现站点的使用帮助
+        </span>
+      </div>
+      <div class="info-site--block">
+        <div class="info-site--top">
+          <p class="info-site--title">站点信息</p>
+          <el-icon><InfoFilled color="rgb(75, 64, 147)" /></el-icon>
+        </div>
+        <ul class="info-site--list">
+          <li class="info-site--item">
+            <p>前端框架</p>
+            <p>vue3</p>
+          </li>
+          <li class="info-site--item">
+            <p>前端UI</p>
+            <p>element-plus</p>
+          </li>
+          <li class="info-site--item">
+            <p>图表库</p>
+            <p>echarts</p>
+          </li>
+          <li class="info-site--item">
+            <p>后端框架</p>
+            <p>nest.js</p>
+          </li>
+          <li class="info-site--item">
+            <p>数据库</p>
+            <p>mysql</p>
+          </li>
+          <li class="info-site--item">
+            <p>当前版本</p>
+            <p>{{ mainStore.version }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="line-charts" class="info-charts"></div>
   </div>
 </template>
 
@@ -133,7 +221,22 @@ const trend = $ref([
   border-top: 1px solid rgb(242, 241, 248);
   border-bottom: 1px solid rgb(242, 241, 248);
   &-item {
+    flex: 1;
     display: flex;
+    justify-content: space-between;
+    transition: all .5s;
+    padding: 30px;
+    margin-right: 30px;
+    @media screen and (max-width: 1400px) {
+      flex-direction: column;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      box-shadow: 0 0 5px #ccc;
+      border-radius: 10px;
+    }
     &:nth-child(1) {
       & > .left > div {
         p {
@@ -196,8 +299,110 @@ const trend = $ref([
     .right {
       width: 210px;
       height: 100%;
-      margin-left: 30px;
+      @media screen and (max-width: 1400px) {
+        height: 80px;
+        margin-top: 30px;
+        display: flex;
+      }
     }
+  }
+}
+
+.info {
+  display: flex;
+  margin-top: 50px;
+  min-height: 350px;
+  align-items: flex-start;
+  &-site {
+    width: 350px;
+    min-width: 350px;
+    &--block {
+      padding: 15px;
+      box-shadow: 0 0 3px #ddd;
+      border-radius: 5px;
+      background-color: rgb(252, 251, 255);
+      margin-top: 15px;
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    &--help {
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 5px;
+      box-shadow: 0 0 3px #ddd;
+      background-color: rgb(252, 251, 255);
+      position: relative;
+      p {
+        color: #333;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      span {
+        color: gray;
+        font-size: 16px;
+        margin-top: 8px;
+        &.button {
+          color: #409eff;
+          margin: 0 3px;
+          font-weight: bold;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    &--icon {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 5px #ddd;
+    }
+
+    &--top {
+      display: flex;
+      justify-content: space-between;
+    }
+    &--title {
+      color: rgb(75, 64, 147);
+      font-size: 14px;
+      font-weight: bold;
+    }
+    &--list {
+      flex-direction: column;
+      margin-top: 15px;
+    }
+    &--item {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      p {
+        color: gray;
+        font-size: 15px;
+      }
+    }
+  }
+  &-charts {
+    flex: 1;
+    padding: 15px;
+    min-height: 350px;
+    margin-left: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ddd;
   }
 }
 </style>
