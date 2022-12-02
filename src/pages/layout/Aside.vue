@@ -25,6 +25,8 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
 <template>
   <div class="aside">
     <el-menu
+      text-color="#666"
+      active-text-color="rgb(75, 64, 147)"
       :unique-opened="true"
       :router="true"
       :default-active="activeMenu"
@@ -41,6 +43,8 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
   .el-menu {
     width: 200px;
     height: 100%;
+    border-right-color: #eee;
+    background-color: rgb(246, 247, 255);
     &.el-menu--collapse {
       width: auto;
     }

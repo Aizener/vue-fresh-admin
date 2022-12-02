@@ -10,8 +10,8 @@ const handleToggleAside = () => {
 <template>
   <div class="header">
     <el-icon size="24px" class="header-left" @click="handleToggleAside">
-      <Expand v-show="!mainStore.collapse" />
-      <Fold v-show="mainStore.collapse" />
+      <Fold color="#333" v-show="!mainStore.collapse" />
+      <Expand color="#333" v-show="mainStore.collapse" />
     </el-icon>
   </div>
 </template>

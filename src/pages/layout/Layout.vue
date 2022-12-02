@@ -25,7 +25,9 @@ import Header from './Header.vue';
     width: auto;
   }
   .el-header {
+    border-bottom: none;
     border-bottom: 1px solid #eee;
+    background-color: rgb(246, 247, 255);
   }
 }
 </style>
