@@ -1,13 +1,27 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store/main';
 import { echarts } from '@/utils/useEcharts';
+import pkg from '../../package.json';
 
+const today = $ref(new Date());
+const dateList = Array<DayType>(
+  { month: 12, day: 5, title: '今天' }
+);
 const mainStore = useMainStore();
 const trend = $ref([
   { color: 'rgb(224, 144, 120)', data: [21, 16, 79, 52, 62, 79, 28] },
   { color: 'rgb(220, 217, 234)', data: [13, 48, 39, 57, 54, 31, 81] },
   { color: 'rgb(24, 223, 190)', data: [21, 33, 34, 53, 63, 72, 23] },
 ]);
+
+const getDateTitle = (date: Date) => {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const target = dateList.find(item => item.month === month && item.day === day);
+  if (target) {
+    return target.title;
+  }
+}
 
 const initLineCharts = () => {
   const charts = echarts.init(document.querySelector('#line-charts') as HTMLElement);
@@ -46,18 +60,21 @@ const initLineCharts = () => {
 }
 const initBarCharts = () => {
   const charts = echarts.init(document.querySelector('#pie-charts') as HTMLElement);
-  const options = {
+  const options: ECOption = {
+    legend: {
+      top: 'bottom',
+      padding: 0
+    },
     series: [
       {
-        name: 'Nightingale Chart',
+        name: '后台图表信息',
         type: 'pie',
-        legend: {
-          show: true,
-        },
+        bottom: '20%',
+        radius: ['10%', '60%'],
         center: ['50%', '50%'],
         roseType: 'area',
         itemStyle: {
-          borderRadius: 8
+          borderRadius: 5
         },
         data: [
           { value: 40, name: 'rose 1' },
@@ -103,6 +120,24 @@ onMounted(() => {
     <div class="card">
       <div class="card-head">
         <el-icon size="20px" color="orange"><HelpFilled /></el-icon>
+        <span>动漫数量</span>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li>
+            <span>今日新增</span>
+            <span>10</span>
+          </li>
+          <li>
+            <span>累计已有</span>
+            <span>100</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <el-icon size="20px" color="green"><HelpFilled /></el-icon>
         <span>动漫数量</span>
       </div>
       <div class="card-content">
@@ -197,10 +232,56 @@ onMounted(() => {
           </li>
         </ul>
       </div>
+      <div class="info-site--block">
+        <div class="info-site--top">
+          <p class="info-site--title">依赖库(dependencies)</p>
+          <el-icon><InfoFilled color="rgb(75, 64, 147)" /></el-icon>
+        </div>
+        <ul class="info-site--list">
+          <li
+            class="info-site--item"
+            v-for="(value, key) in pkg.dependencies"
+            :key="key"
+          >
+            <p>{{ key }}</p>
+            <p>{{ value }}</p>
+          </li>
+        </ul>
+      </div>
+      <div class="info-site--block">
+        <div class="info-site--top">
+          <p class="info-site--title">依赖库(devDependencies)</p>
+          <el-icon><InfoFilled color="rgb(75, 64, 147)" /></el-icon>
+        </div>
+        <ul class="info-site--list">
+          <li
+            class="info-site--item"
+            v-for="(value, key) in pkg.devDependencies"
+            :key="key"
+          >
+            <p>{{ key }}</p>
+            <p>{{ value }}</p>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="info-charts">
-      <div id="line-charts" class="line-charts"></div>
-      <div id="pie-charts" class="pie-charts"></div>
+    <div class="info-primary">
+      <div class="info-charts">
+        <div id="line-charts" class="line-charts"></div>
+        <div id="pie-charts" class="pie-charts"></div>
+      </div>
+      <div class="info-date">
+        <el-calendar v-model="today">
+          <template #date-cell="{ data }">
+            <p :class="data.isSelected ? 'is-selected' : ''">
+              {{ data.day.split('-').slice(1).join('-') }}
+              {{ data.isSelected ? '✔️' : '' }}
+            </p>
+              
+            <p class="info-date--content">{{ getDateTitle(data.date) }}</p>
+          </template>
+        </el-calendar>
+      </div>
     </div>
   </div>
 </template>
@@ -226,6 +307,9 @@ onMounted(() => {
     &:nth-child(3) {
       margin-right: 0;
       background: radial-gradient(ellipse farthest-corner at 100% 0%, rgb(233, 253, 232) 20%, rgb(228, 251, 223) 40%, rgb(202, 247, 211) 60%, rgb(222, 253, 190) 100%);
+    }
+    &:nth-child(4) {
+      background: linear-gradient(145deg, rgb(150, 208, 218), rgb(196, 226, 213), rgb(196, 226, 213));
     }
     &-head {
       display: flex;
@@ -348,7 +432,6 @@ onMounted(() => {
 .info {
   display: flex;
   margin-top: 50px;
-  min-height: 350px;
   align-items: flex-start;
   &-site {
     width: 350px;
@@ -433,9 +516,14 @@ onMounted(() => {
       }
     }
   }
-  &-charts {
+  &-primary {
     flex: 1;
+    padding: 0 30px;
     display: flex;
+    flex-direction: column;
+    .info-charts {
+      display: flex;
+    }
     .line-charts, .pie-charts {
       flex: 1;
       padding: 15px;
@@ -443,6 +531,28 @@ onMounted(() => {
       margin-left: 30px;
       border-radius: 5px;
       box-shadow: 0 0 5px #ddd;
+    }
+    .line-charts {
+      flex: 3;
+      margin-left: 0;
+    }
+    .pie-charts {
+      flex: 2;
+    }
+    .info-date {
+      margin-top: 30px;
+      box-shadow: 0 0 5px #ddd;
+      border-radius: 5px;
+      padding: 20px 15px 0 15px;
+      &--content {
+        color: rgb(75, 64, 147);
+        font-size: 14px;
+        font-weight: bold;
+        height: calc(100% - 21px);
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
     }
   }
 }
