@@ -9,7 +9,7 @@ const trend = $ref([
   { color: 'rgb(24, 223, 190)', data: [21, 33, 34, 53, 63, 72, 23] },
 ]);
 
-onMounted(() => {
+const initLineCharts = () => {
   const charts = echarts.init(document.querySelector('#line-charts') as HTMLElement);
   const lineStyle = {
     shadowColor: 'rgba(0, 0, 0, .6)',
@@ -43,6 +43,40 @@ onMounted(() => {
     ]
   };
   charts.setOption(options);
+}
+const initBarCharts = () => {
+  const charts = echarts.init(document.querySelector('#pie-charts') as HTMLElement);
+  const options = {
+    series: [
+      {
+        name: 'Nightingale Chart',
+        type: 'pie',
+        legend: {
+          show: true,
+        },
+        center: ['50%', '50%'],
+        roseType: 'area',
+        itemStyle: {
+          borderRadius: 8
+        },
+        data: [
+          { value: 40, name: 'rose 1' },
+          { value: 38, name: 'rose 2' },
+          { value: 32, name: 'rose 3' },
+          { value: 30, name: 'rose 4' },
+          { value: 28, name: 'rose 5' },
+          { value: 26, name: 'rose 6' },
+          { value: 22, name: 'rose 7' },
+          { value: 18, name: 'rose 8' }
+        ]
+      }
+    ]
+  };
+  charts.setOption(options);
+}
+onMounted(() => {
+  initLineCharts();
+  initBarCharts();
 });
 </script>
 
@@ -164,7 +198,10 @@ onMounted(() => {
         </ul>
       </div>
     </div>
-    <div id="line-charts" class="info-charts"></div>
+    <div class="info-charts">
+      <div id="line-charts" class="line-charts"></div>
+      <div id="pie-charts" class="pie-charts"></div>
+    </div>
   </div>
 </template>
 
@@ -398,11 +435,15 @@ onMounted(() => {
   }
   &-charts {
     flex: 1;
-    padding: 15px;
-    min-height: 350px;
-    margin-left: 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #ddd;
+    display: flex;
+    .line-charts, .pie-charts {
+      flex: 1;
+      padding: 15px;
+      min-height: 350px;
+      margin-left: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #ddd;
+    }
   }
 }
 </style>

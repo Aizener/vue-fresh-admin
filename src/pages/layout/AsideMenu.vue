@@ -33,4 +33,5 @@ const { menu } = defineProps<{
 </template>
 
 <style lang="scss" scoped>
+
 </style>
