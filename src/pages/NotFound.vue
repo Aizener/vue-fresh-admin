@@ -45,13 +45,13 @@
   }
   @keyframes light {
     0% {
-      box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #f17;
+      box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 80px #f17;
     }
     50% {
-      box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff, 0 0 80px #f17;
+      box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #f17;
     }
     100% {
-      box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #f17;
+      box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 80px #f17;
 
     }
   }
@@ -62,8 +62,9 @@
     border-radius: 50%;
     margin: 0 50px;
     box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 70px #fff, 0 0 80px #fff, 0 0 100px #f17;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 80px #f17;
     position: relative;
-    animation: light 4s infinite linear;
+    animation: light 3s infinite linear;
     @keyframes rotateEye {
       0% { transform: rotate(0); }
       50% { transform: rotate(-5deg); }
@@ -73,7 +74,7 @@
       position: absolute;
       left: 40px;
       top: 50px;
-      width: 80px;
+      width: 85px;
       height: 30px;
       display: flex;
       align-items: center;
@@ -120,7 +121,7 @@
       background-color: #5c3191;
       border-radius: 50%;
       transform: rotate(15deg);
-      animation: scaleMouth 2s infinite linear;
+      animation: scaleMouth 3s infinite linear;
     }
   }
   .title {
