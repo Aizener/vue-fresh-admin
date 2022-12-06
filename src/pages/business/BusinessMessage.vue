@@ -4,11 +4,8 @@ const tableHeader = $ref([
   { prop: 'title', label: '标题', width: '200px' },
   { prop: 'content', label: '内容', width: '200px' },
 ]);
-const tableData = $ref([
-  { name: 'name1', title: 'title1', content: 'content1' },
-  { name: 'name2', title: 'title2', content: 'content2' },
-  { name: 'name3', title: 'title3', content: 'content3' },
-]);
+let tableData = $ref<Array<unknown>>([]);
+
 const tableCondition = $ref({
   page: 1,
   size: 10,
@@ -34,11 +31,31 @@ const tableCondition = $ref({
       placeholder: '请输入名称搜索'
     },
   }
-})
+});
+
+const getData = async () => {
+  return new Promise(resolve => setTimeout(() => {
+    const range = tableCondition.page * 10;
+    for (let i = range ; i < range + tableCondition.size; i ++) {
+      tableData.push({ name: 'name' + i, title: 'title' + i, content: 'content' + i });
+    }
+    resolve(1)
+  }, 500));
+}
+
+const handleSearch = async (done: () => void) => {
+  await getData();
+  done();
+}
 </script>
 
 <template>
-  <CommonTable :tableData="tableData" :tableHeader="tableHeader" :tableCondition="tableCondition"></CommonTable>
+  <CommonTable
+    v-model:tableData="tableData"
+    v-model:tableHeader="tableHeader"
+    v-model:tableCondition="tableCondition"
+    @search="handleSearch"
+  ></CommonTable>
 </template>
 
 <style lang="scss">

@@ -10,21 +10,55 @@ type TableConditionType = {
   total: number,
   seoForm: Array<{ [prop: string]: any }>
 }
-const props = defineProps<{
+
+let {
+  tableData,
+  tableHeader,
+  tableCondition,
+  add
+} = defineProps<{
   tableData: Array<unknown>,
   tableHeader: TableHeaderType[],
   tableCondition: TableConditionType
-  add?: string
+  add?: string,
 }>();
 
-const { tableData, tableHeader, tableCondition, add } = $$(props);
-const copyTableCondition: TableConditionType = JSON.parse(JSON.stringify(tableCondition));
+const emit = defineEmits(['reset', 'search', 'update:tableData', 'update:tableCondition']);
 
+const copyTableCondition: TableConditionType = JSON.parse(JSON.stringify(tableCondition));
 const handleReset = () => {
-  for (const key in tableCondition) {
-    (tableCondition as any)[key] = copyTableCondition[key as keyof TableConditionType];
-  }
+  emit('update:tableCondition', copyTableCondition);
+  emit('reset');
+  searchFn();
 }
+
+let loading = $ref(false);
+
+const searchFn = () => {
+  loading = true;
+  emit('update:tableData', []);
+  emit('search', () => {
+    loading = false;
+  });
+}
+
+const handleSearch = () => {
+  tableCondition.page = 1;
+  searchFn();
+}
+
+const handleChangePage = (page: number) => {
+  tableCondition.page = page;
+  searchFn();
+}
+
+const handleChangeSize = (size: number) => {
+  tableCondition.size = size;
+  searchFn();
+}
+onMounted(() => {
+  searchFn();
+});
 </script>
 
 <template>
@@ -56,11 +90,11 @@ const handleReset = () => {
       </div>
       <div class="search-right">
         <el-button @click="handleReset">重置</el-button>
-        <el-button type="primary" @add="$emit('search')">搜索</el-button>
+        <el-button type="primary" @click="handleSearch">搜索</el-button>
         <el-button v-if="add" type="success" @add="$emit('add')">{{ add || '添加' }}</el-button>
       </div>
     </div>
-    <el-table :data="tableData" border>
+    <el-table :data="tableData" border v-loading="loading">
       <el-table-column
         v-for="item in tableHeader"
         :prop="item.prop"
@@ -72,7 +106,10 @@ const handleReset = () => {
       <el-pagination
         background
         layout="prev, pager, next, sizes"
-        :total="100"
+        :current-page="tableCondition.page"
+        :total="tableCondition.total"
+        @current-change="handleChangePage"
+        @size-change="handleChangeSize"
       />
     </div>
   </div>
