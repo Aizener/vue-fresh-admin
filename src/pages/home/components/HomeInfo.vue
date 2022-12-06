@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store/main';
 import { echarts } from '@/utils/useEcharts';
-import pkg from '../../package.json';
+import pkg from '_/package.json';
+import { useDebounceFn } from '@vueuse/core'
+import { EChartsType } from 'echarts/core';
 
 const today = $ref(new Date());
 const dateList = Array<DayType>(
   { month: 12, day: 5, title: '今天' }
 );
 const mainStore = useMainStore();
-const trend = $ref([
-  { color: 'rgb(224, 144, 120)', data: [21, 16, 79, 52, 62, 79, 28] },
-  { color: 'rgb(220, 217, 234)', data: [13, 48, 39, 57, 54, 31, 81] },
-  { color: 'rgb(24, 223, 190)', data: [21, 33, 34, 53, 63, 72, 23] },
-]);
 
 const getDateTitle = (date: Date) => {
   const month = date.getMonth() + 1;
@@ -23,8 +20,24 @@ const getDateTitle = (date: Date) => {
   }
 }
 
+let lineCharts: EChartsType, barCharts: EChartsType;
+const resizeCharts = useDebounceFn(() => {
+  lineCharts.dispose();
+  barCharts.dispose();
+  setTimeout(() => {
+    initLineCharts();
+    initBarCharts();
+  }, 500);
+}, 500)
+window.onresize = () => {
+  resizeCharts();
+}
+watch(() => mainStore.collapse, async () => {
+  resizeCharts();
+});
+
 const initLineCharts = () => {
-  const charts = echarts.init(document.querySelector('#line-charts') as HTMLElement);
+  lineCharts = echarts.init(document.querySelector('#line-charts') as HTMLElement);
   const lineStyle = {
     shadowColor: 'rgba(0, 0, 0, .6)',
     shadowBlur: 30
@@ -56,10 +69,10 @@ const initLineCharts = () => {
       { data: [710, 932, 601, 634, 1290, 1130, 1420], type: 'line', smooth: true, name: '图例3', lineStyle },
     ]
   };
-  charts.setOption(options);
+  lineCharts.setOption(options);
 }
 const initBarCharts = () => {
-  const charts = echarts.init(document.querySelector('#pie-charts') as HTMLElement);
+  barCharts = echarts.init(document.querySelector('#pie-charts') as HTMLElement);
   const options: ECOption = {
     legend: {
       top: 'bottom',
@@ -89,7 +102,7 @@ const initBarCharts = () => {
       }
     ]
   };
-  charts.setOption(options);
+  barCharts.setOption(options);
 }
 onMounted(() => {
   initLineCharts();
@@ -98,97 +111,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="card-list">
-    <div class="card">
-      <div class="card-head">
-        <el-icon size="20px" color="#409eff"><HelpFilled /></el-icon>
-        <span>动漫数量</span>
-      </div>
-      <div class="card-content">
-        <ul>
-          <li>
-            <span>今日新增</span>
-            <span>10</span>
-          </li>
-          <li>
-            <span>累计已有</span>
-            <span>100</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <el-icon size="20px" color="orange"><HelpFilled /></el-icon>
-        <span>动漫数量</span>
-      </div>
-      <div class="card-content">
-        <ul>
-          <li>
-            <span>今日新增</span>
-            <span>10</span>
-          </li>
-          <li>
-            <span>累计已有</span>
-            <span>100</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <el-icon size="20px" color="green"><HelpFilled /></el-icon>
-        <span>动漫数量</span>
-      </div>
-      <div class="card-content">
-        <ul>
-          <li>
-            <span>今日新增</span>
-            <span>10</span>
-          </li>
-          <li>
-            <span>累计已有</span>
-            <span>100</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <el-icon size="20px" color="green"><HelpFilled /></el-icon>
-        <span>动漫数量</span>
-      </div>
-      <div class="card-content">
-        <ul>
-          <li>
-            <span>今日新增</span>
-            <span>10</span>
-          </li>
-          <li>
-            <span>累计已有</span>
-            <span>100</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="trend">
-    <div class="trend-item" v-for="(item, idx) in trend">
-      <div class="left">
-        <p>最近浏览量趋势</p>
-        <div>
-          <p>201</p>
-          <span>5<el-icon><TopRight /></el-icon></span>
-        </div>
-        <span>最近一周</span>
-      </div>
-      <div class="right">
-        <Bar :color="item.color" :data="item.data" />
-      </div>
-    </div>
-  </div>
-
   <div class="info">
     <div class="info-site">
       <div class="info-site--help">
@@ -287,147 +209,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.card-list {
-  display: flex;
-  justify-content: space-between;
-  .card {
-    flex: 1;
-    padding: 15px;
-    margin: 0 15px;
-    border-radius: 5px;
-    background: #fff;
-    box-shadow: 0 0 5px #ddd;
-    &:nth-child(1) {
-      margin-left: 0;
-      background: linear-gradient(145deg, rgb(252, 238, 209), rgb(211, 214, 252));
-    }
-    &:nth-child(2) {
-      background: linear-gradient(145deg, rgb(255, 237, 206), rgb(254, 226, 235));
-    }
-    &:nth-child(3) {
-      margin-right: 0;
-      background: radial-gradient(ellipse farthest-corner at 100% 0%, rgb(233, 253, 232) 20%, rgb(228, 251, 223) 40%, rgb(202, 247, 211) 60%, rgb(222, 253, 190) 100%);
-    }
-    &:nth-child(4) {
-      background: linear-gradient(145deg, rgb(150, 208, 218), rgb(196, 226, 213), rgb(196, 226, 213));
-    }
-    &-head {
-      display: flex;
-      justify-content: space-between;
-      color: #333;
-      font-size: 14px;
-      align-items: center;
-      padding-bottom: 10px;
-    }
-    &-content {
-      padding-top: 15px;
-      ul {
-        li {
-          color: #333;
-          font-size: 14px;
-          padding: 5px 0;
-          display: flex;
-          justify-content: space-between;
-        }
-      }
-    }
-  }
-}
-
-.trend {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-  padding: 30px 0;
-  border-top: 1px solid rgb(242, 241, 248);
-  border-bottom: 1px solid rgb(242, 241, 248);
-  &-item {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    transition: all .5s;
-    padding: 30px;
-    margin-right: 30px;
-    @media screen and (max-width: 1400px) {
-      flex-direction: column;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-    &:hover {
-      box-shadow: 0 0 5px #ccc;
-      border-radius: 10px;
-    }
-    &:nth-child(1) {
-      & > .left > div {
-        p {
-          color: rgb(224, 144, 120);
-        }
-        span {
-          color: rgb(105, 138, 125);
-          background-color: rgb(224, 250, 239);
-        }
-      }
-    }
-    &:nth-child(2) {
-      & > .left > div {
-        p {
-          color: rgb(81, 69, 159);
-        }
-        span {
-          color: rgb(81, 69, 159);
-          background-color: rgb(220, 217, 234);
-        }
-      }
-    }
-    &:nth-child(3) {
-      & > .left > div {
-        p {
-          color: rgb(24, 223, 190);
-        }
-        span {
-          color: rgb(24, 223, 190);
-          background-color: rgb(214, 251, 234);
-        }
-      }
-    }
-    .left {
-      display: flex;
-      flex-direction: column;
-      & > p {
-        color: #333;
-        font-size: 14px;
-      }
-      & > div {
-        display: flex;
-        justify-content: space-between;
-        font-weight: bold;
-        margin: 10px 0;
-        span {
-          display: flex;
-          align-items: center;
-          font-size: 12px;
-          padding: 2px 7px;
-          border-radius: 5px;
-          
-        }
-      }
-      & > span {
-        color: gray;
-        font-size: 12px;
-      }
-    }
-    .right {
-      width: 210px;
-      height: 100%;
-      @media screen and (max-width: 1400px) {
-        height: 80px;
-        margin-top: 30px;
-        display: flex;
-      }
-    }
-  }
-}
 
 .info {
   display: flex;

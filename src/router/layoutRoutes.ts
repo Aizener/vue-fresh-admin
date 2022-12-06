@@ -5,7 +5,7 @@ const layoutRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/pages/Home.vue'),
+    component: () => import('@/pages/home/Home.vue'),
     meta: {
       title: '仪表盘',
       icon: markRaw(Icons['Odometer'])

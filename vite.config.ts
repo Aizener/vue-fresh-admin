@@ -9,11 +9,13 @@ import eslint from 'vite-plugin-eslint';
 import { resolve } from 'path';
 
 const pathSrc = resolve(__dirname, './src');
+const pathRoot = resolve(__dirname, '.');
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      '@': pathSrc
+      '@': pathSrc,
+      '_': pathRoot
     }
   },
   plugins: [
