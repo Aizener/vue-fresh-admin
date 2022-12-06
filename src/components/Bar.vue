@@ -4,8 +4,8 @@ const props = defineProps<{
   data: Array<number>
 }>();
 const { color, data } = $$(props);
-const max = Math.max(...data);
-const activeIndexs = $ref(data.map((item: number, idx: number) => item === max && idx).filter((item: number) => item));
+const max = Math.max(...(data as unknown as Array<number>));
+const activeIndexs = $ref((data as unknown as Array<number>).map((item: number, idx: number) => item === max && idx).filter((item: number | boolean) => item));
 const range = $ref(max);
 </script>
 
