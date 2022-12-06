@@ -20,11 +20,11 @@ const layoutRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/business/business_manage',
-        name: 'PlatformSettings',
-        component: () => import('@/pages/system/PlatformSettings.vue'),
+        path: '/business/business_message',
+        name: 'BusinessMessage',
+        component: () => import('@/pages/business/BusinessMessage.vue'),
         meta: {
-          title: '平台设置',
+          title: '评论管理',
           icon: markRaw(Icons['Setting'])
         }
       }
