@@ -27,7 +27,6 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
     <el-menu
       text-color="#666"
       :active-text-color="'var(--co-primary-color)'"
-      :unique-opened="true"
       :router="true"
       :default-active="activeMenu"
       :collapse="mainStore.collapse"
@@ -41,7 +40,7 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
 .aside {
   height: 100%;
   .el-menu {
-    width: 200px;
+    width: 240px;
     height: 100%;
     border-right-color: #eee;
     background-color: rgb(246, 247, 255);

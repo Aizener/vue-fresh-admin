@@ -20,6 +20,46 @@ const layoutRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
+        path: '/business/nesting1.vue',
+        name: 'Nesting1Business',
+        component: () => import('@/pages/business/nesting/nesting1.vue'),
+        meta: {
+          title: '嵌套路由',
+          icon: markRaw(Icons['Setting']),
+        },
+        children: [
+          {
+            path: '/business/nesting1-1.vue',
+            name: 'Nesting11Business',
+            component: () => import('@/pages/business/nesting/nesting1-1.vue'),
+            meta: {
+              title: '嵌套路由1-1',
+              icon: markRaw(Icons['Setting']),
+            },
+            children: [
+              {
+                path: '/business/nesting1-1-1.vue',
+                name: 'Nesting111Business',
+                component: () => import('@/pages/business/nesting/nesting1-1-1.vue'),
+                meta: {
+                  title: '嵌套路由1-1-1',
+                  icon: markRaw(Icons['Setting'])
+                }
+              }
+            ]
+          },
+          {
+            path: '/business/nesting1-2.vue',
+            name: 'Nesting12Business',
+            component: () => import('@/pages/business/nesting/nesting1-2.vue'),
+            meta: {
+              title: '嵌套路由1-2',
+              icon: markRaw(Icons['Setting'])
+            }
+          }
+        ]
+      },
+      {
         path: '/business/business_message',
         name: 'BusinessMessage',
         component: () => import('@/pages/business/BusinessMessage.vue'),
