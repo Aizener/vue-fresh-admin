@@ -26,10 +26,10 @@ a {
 }
 
 
-a {
+a.co-link {
   color: #409eff;
   margin: 0 3px;
 }
-a:hover {
+a.co-link:hover {
   text-decoration: underline;
 }

@@ -125,7 +125,7 @@ onMounted(() => {
       <div class="info-site--block">
         <div class="info-site--top">
           <p class="info-site--title">站点信息</p>
-          <el-icon><InfoFilled color="var(--co-primary-color);" /></el-icon>
+          <el-icon><InfoFilled color="var(--co-primary-color)" /></el-icon>
         </div>
         <ul class="info-site--list">
           <li class="info-site--item">
@@ -157,7 +157,7 @@ onMounted(() => {
       <div class="info-site--block">
         <div class="info-site--top">
           <p class="info-site--title">依赖库(dependencies)</p>
-          <el-icon><InfoFilled color="var(--co-primary-color);" /></el-icon>
+          <el-icon><InfoFilled color="var(--co-primary-color)" /></el-icon>
         </div>
         <ul class="info-site--list">
           <li
@@ -173,7 +173,7 @@ onMounted(() => {
       <div class="info-site--block">
         <div class="info-site--top">
           <p class="info-site--title">依赖库(devDependencies)</p>
-          <el-icon><InfoFilled color="var(--co-primary-color);" /></el-icon>
+          <el-icon><InfoFilled color="var(--co-primary-color)" /></el-icon>
         </div>
         <ul class="info-site--list">
           <li

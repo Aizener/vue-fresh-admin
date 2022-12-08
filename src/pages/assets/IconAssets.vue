@@ -35,7 +35,7 @@ onMounted(() => {
 <template>
   <CoTips class="iconify-tip" title="使用Iconify组件">
     <div>
-      得益于<a target="_blank" href="https://github.com/antfu/unplugin-icons">unplugin-icons</a>和<a target="_blank" href="https://github.com/antfu/unplugin-auto-import">unplugin-auto-import</a>插件，可以使用<a target="_blank" href="http://icon-sets.iconify.design/">Iconify的图标集</a>，因为数量太多，简单列出几个。
+      得益于<a class="co-link" target="_blank" href="https://github.com/antfu/unplugin-icons">unplugin-icons</a>和<a class="co-link" target="_blank" href="https://github.com/antfu/unplugin-auto-import">unplugin-auto-import</a>插件，可以使用<a class="co-link" target="_blank" href="http://icon-sets.iconify.design/">Iconify的图标集</a>，因为数量太多，简单列出几个。
     </div>
   </CoTips>
   <div class="icon-list">
