@@ -1,9 +1,29 @@
 <script setup lang="ts">
+const getStarStyle = (item: number) => {
+  const ran = Math.random();
+  const value = Math.ceil(ran * 10) + 10;
+  const w = window.innerWidth, h = window.innerHeight;
+  const left = w * Math.random();
+  const top = h * Math.random();
 
+  return {
+    width: value + 'px',
+    height: value + 'px',
+    left: left + 'px',
+    top: top + 'px',
+    animationDelay: `${item * ran}s`
+  }
+}
 </script>
 
 <template>
   <div class="not-found">
+    <div
+      class="star"
+      v-for="(item, idx) in 64"
+      :key="idx"
+      :style="[getStarStyle(item)]"
+    ></div>
     <div class="box">
       <div class="content">
         <p class="title">4</p>
@@ -26,11 +46,47 @@
 .not-found {
   width: 100%;
   height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   background: linear-gradient(to bottom, rgb(80, 50, 139), rgb(123, 66, 196), rgb(123, 66, 196));
+  
+  @keyframes scale {
+    0% { transform: scale(1); opacity: .5; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: .5; }
+  }      
+  .star {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    animation: scale 3s infinite linear;
+    opacity: .5;
+    &:hover {
+      opacity: 1;
+      cursor: grab;
+    }
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background-color: #fff;
+      box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff;
+    }
+    &::before {
+      width: 100%;
+      height: 20%;
+    }
+    &::after {
+      width: 20%;
+      height: 100%;
+      left: 50%;
+      transform: translate(-50%, -40%);
+    }
+  }
   .box {
     display: flex;
     flex-direction: column;

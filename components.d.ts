@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
     CommonTable: typeof import('./src/components/CommonTable.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
