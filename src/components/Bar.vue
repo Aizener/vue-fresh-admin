@@ -32,7 +32,7 @@ const range = $ref(max);
     width: 30px;
     margin-right: 15px;
     border-radius: 5px;
-    box-shadow: 0 0 5px #eee;
+    box-shadow: var(--co-shadow-default);
     background-color: rgb(229, 236, 245);
     &:last-child {
       margin-right: 0;

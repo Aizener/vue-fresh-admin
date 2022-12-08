@@ -46,7 +46,7 @@ const initLineCharts = () => {
     title: {
       text: '后台图表信息',
       textStyle: {
-        color: 'rgb(75, 64, 147)'
+        color: 'var(--co-primary-color);'
       }
     },
     xAxis: {
@@ -125,7 +125,7 @@ onMounted(() => {
       <div class="info-site--block">
         <div class="info-site--top">
           <p class="info-site--title">站点信息</p>
-          <el-icon><InfoFilled color="rgb(75, 64, 147)" /></el-icon>
+          <el-icon><InfoFilled color="var(--co-primary-color);" /></el-icon>
         </div>
         <ul class="info-site--list">
           <li class="info-site--item">
@@ -157,7 +157,7 @@ onMounted(() => {
       <div class="info-site--block">
         <div class="info-site--top">
           <p class="info-site--title">依赖库(dependencies)</p>
-          <el-icon><InfoFilled color="rgb(75, 64, 147)" /></el-icon>
+          <el-icon><InfoFilled color="var(--co-primary-color);" /></el-icon>
         </div>
         <ul class="info-site--list">
           <li
@@ -173,7 +173,7 @@ onMounted(() => {
       <div class="info-site--block">
         <div class="info-site--top">
           <p class="info-site--title">依赖库(devDependencies)</p>
-          <el-icon><InfoFilled color="rgb(75, 64, 147)" /></el-icon>
+          <el-icon><InfoFilled color="var(--co-primary-color);" /></el-icon>
         </div>
         <ul class="info-site--list">
           <li
@@ -271,7 +271,7 @@ onMounted(() => {
       transform: translate(-50%, -50%);
       background-color: #fff;
       border-radius: 50%;
-      box-shadow: 0 0 5px #ddd;
+      box-shadow: var(--co-shadow-default);
     }
 
     &--top {
@@ -279,7 +279,7 @@ onMounted(() => {
       justify-content: space-between;
     }
     &--title {
-      color: rgb(75, 64, 147);
+      color: var(--co-primary-color);;
       font-size: 14px;
       font-weight: bold;
     }
@@ -311,7 +311,7 @@ onMounted(() => {
       min-height: 350px;
       margin-left: 30px;
       border-radius: 5px;
-      box-shadow: 0 0 5px #ddd;
+      box-shadow: var(--co-shadow-default);
     }
     .line-charts {
       flex: 3;
@@ -322,11 +322,11 @@ onMounted(() => {
     }
     .info-date {
       margin-top: 30px;
-      box-shadow: 0 0 5px #ddd;
+      box-shadow: var(--co-shadow-default);
       border-radius: 5px;
       padding: 20px 15px 0 15px;
       &--content {
-        color: rgb(75, 64, 147);
+        color: var(--co-primary-color);;
         font-size: 14px;
         font-weight: bold;
         height: calc(100% - 21px);

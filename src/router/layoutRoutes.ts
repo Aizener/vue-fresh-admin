@@ -39,11 +39,11 @@ const layoutRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/assets/assets_manage',
-        name: 'PlatformSettings',
-        component: () => import('@/pages/system/PlatformSettings.vue'),
+        path: '/assets/assets_icon',
+        name: 'IconAssets',
+        component: () => import('@/pages/assets/IconAssets.vue'),
         meta: {
-          title: '平台设置',
+          title: '图标组件',
           icon: markRaw(Icons['Setting'])
         }
       }

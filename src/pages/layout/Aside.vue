@@ -26,7 +26,7 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
   <div class="aside">
     <el-menu
       text-color="#666"
-      active-text-color="rgb(75, 64, 147)"
+      :active-text-color="'var(--co-primary-color)'"
       :unique-opened="true"
       :router="true"
       :default-active="activeMenu"

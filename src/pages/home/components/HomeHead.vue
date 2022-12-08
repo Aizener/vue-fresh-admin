@@ -89,7 +89,7 @@
     margin: 0 15px;
     border-radius: 5px;
     background: #fff;
-    box-shadow: 0 0 5px #ddd;
+    box-shadow: var(--co-shadow-default);
     &:nth-child(1) {
       margin-left: 0;
       background: linear-gradient(145deg, rgb(252, 238, 209), rgb(211, 214, 252));

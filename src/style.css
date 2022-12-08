@@ -19,3 +19,17 @@ a {
 ::-webkit-scrollbar-track {
   background-color: #ddd;
 }
+
+:root {
+  --co-shadow-default: 0 0 5px #ddd;
+  --co-primary-color: rgb(75, 64, 147);
+}
+
+
+a {
+  color: #409eff;
+  margin: 0 3px;
+}
+a:hover {
+  text-decoration: underline;
+}
