@@ -11,7 +11,7 @@ const getStarStyle = (item: number) => {
     height: value + 'px',
     left: left + 'px',
     top: top + 'px',
-    animationDelay: `${item * ran}s`
+    animationDelay: `-${item * ran}s`
   }
 }
 </script>
