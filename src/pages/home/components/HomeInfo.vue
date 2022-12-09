@@ -29,9 +29,7 @@ const resizeCharts = useDebounceFn(() => {
     initBarCharts();
   }, 500);
 }, 500)
-window.onresize = () => {
-  resizeCharts();
-}
+
 watch(() => mainStore.collapse, async () => {
   resizeCharts();
 });

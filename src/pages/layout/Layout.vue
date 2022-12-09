@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Aside from './Aside.vue';
 import Header from './Header.vue';
+import TabRouter from './TabRouter.vue';
+
 </script>
 
 <template>
@@ -11,7 +13,12 @@ import Header from './Header.vue';
     <el-container>
       <el-header><Header /></el-header>
       <el-main>
-        <router-view></router-view>
+        <TabRouter />
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </el-main>
     </el-container>
   </el-container>
@@ -28,6 +35,10 @@ import Header from './Header.vue';
     border-bottom: none;
     border-bottom: 1px solid #eee;
     background-color: rgb(246, 247, 255);
+  }
+  .el-main {
+    padding-top: 50px;
+    position: relative;
   }
 }
 </style>

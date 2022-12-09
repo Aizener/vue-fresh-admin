@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useMainStore } from '@/store/main';
+import { useRouterStore } from '@/store/router';
+import { storeToRefs } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
 import AsideMenu from './AsideMenu.vue';
 
@@ -8,8 +10,9 @@ const router = useRouter();
 const routes = router.getRoutes();
 const menuRoutes = routes.find(route => route.name === 'Layout')?.children;
 const mainStore = useMainStore();
+const routerStore = useRouterStore();
 
-const activeMenu = $ref<string>(route.path);
+const { currentRoute } = storeToRefs(routerStore);
 const getMenu = (routes: RouteRecordRaw[]): Menu => {
   return routes.map(item => ({
     index: item.path,
@@ -28,7 +31,7 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
       text-color="#666"
       active-text-color="var(--co-primary-color)"
       :router="true"
-      :default-active="activeMenu"
+      :default-active="currentRoute.path"
       :collapse="mainStore.collapse"
     >
       <AsideMenu :menu="menu"></AsideMenu>
