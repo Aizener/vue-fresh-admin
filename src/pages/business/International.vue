@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { Icon } from '@iconify/vue';
+import { useMainStore } from '@/store/main';
 
 const i18n = useI18n();
 const lang = $ref(i18n.locale.value);
+const mainStore = useMainStore();
 const switchLocale = (type: string) => {
   i18n.locale.value = type;
+  mainStore.updateValue('locale', type);
 }
 </script>
 

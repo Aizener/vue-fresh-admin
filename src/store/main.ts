@@ -4,7 +4,8 @@ export const useMainStore = defineStore('main', {
   state: (): MainState => {
     return {
       version: '0.0.1',
-      collapse: false
+      collapse: false,
+      locale: 'zhCn'
     }
   },
   actions: {

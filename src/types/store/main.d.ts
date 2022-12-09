@@ -1,4 +1,5 @@
 type MainState = {
   version: string,
-  collapse: boolean
+  collapse: boolean,
+  locale: string
 }
