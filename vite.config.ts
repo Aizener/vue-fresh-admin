@@ -6,6 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import eslint from 'vite-plugin-eslint';
+import autoprefixer from 'autoprefixer';
 import { resolve } from 'path';
 
 const pathSrc = resolve(__dirname, './src');
@@ -16,6 +17,22 @@ export default defineConfig({
     alias: {
       '@': pathSrc,
       '_': pathRoot
+    }
+  },
+  css: {
+    postcss: {
+      plugins: [
+        autoprefixer({
+          overrideBrowserslist: [
+            "Android 4.1",
+            "iOS 7.1",
+            "Chrome > 31",
+            "ff > 31",
+            "ie >= 8"
+            //'last 2 versions', // 所有主流浏览器最近2个版本
+          ]
+        })
+      ]
     }
   },
   plugins: [

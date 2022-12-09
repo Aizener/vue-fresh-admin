@@ -67,6 +67,15 @@ const layoutRoutes: RouteRecordRaw[] = [
           title: '评论管理',
           icon: markRaw(Icons['Setting'])
         }
+      },
+      {
+        path: '/business/international',
+        name: 'International',
+        component: () => import('@/pages/business/International.vue'),
+        meta: {
+          title: '国际化',
+          icon: markRaw(Icons['Setting'])
+        }
       }
     ]
   },

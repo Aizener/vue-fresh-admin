@@ -4,7 +4,7 @@ const {
   content
 } = defineProps<{
   title: string,
-  content: string
+  content?: string
 }>();
 </script>
 
