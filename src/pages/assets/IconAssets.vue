@@ -12,8 +12,9 @@ const getIconifyCodeText = (name: string) => {
   return `<Icon icon="${name}" />`;
 }
 
+let clipboard = $ref<Clipboard>();
 onMounted(() => {
-  const clipboard = new Clipboard('.icon-item');
+  clipboard = new Clipboard('.icon-item');
   clipboard.on('success', e => {
     ElMessage({
       message: `图标'${(e.trigger as HTMLElement).dataset.name}'复制成功！`,
@@ -28,6 +29,13 @@ onMounted(() => {
       showClose: true
     });
   });
+});
+
+onDeactivated(() => {
+  clipboard!.destroy();
+});
+onUnmounted(() => {
+  clipboard!.destroy();
 });
 
 </script>

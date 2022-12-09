@@ -12,7 +12,7 @@
 <style lang="scss" scoped>
 .nesting {
   color: #fff;
-  padding: 15px;
+  padding: 30px;
   background: rgb(190, 190, 210);
 }
 </style>
