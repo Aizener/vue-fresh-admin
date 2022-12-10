@@ -2,7 +2,8 @@
 type TableHeaderType = {
   prop: string,
   label: string,
-  width: '200px'
+  width: '200px',
+  fixed: false
 }
 type TableConditionType = {
   page: number,
@@ -94,13 +95,27 @@ onMounted(() => {
         <el-button v-if="add" type="success" @add="$emit('add')">{{ add || '添加' }}</el-button>
       </div>
     </div>
-    <el-table :data="tableData" border v-loading="loading">
+    <el-table
+      :data="tableData"
+      border
+      v-loading="loading"
+    >
       <el-table-column
         v-for="item in tableHeader"
         :prop="item.prop"
         :label="item.label"
         :minWidth="item.width"
-      ></el-table-column>
+        :fixed="item.fixed"
+      >
+        <template #default="scope">
+          <slot :row="scope.row" :prop="item.prop">
+            {{ scope.row[item.prop] }}
+          </slot>
+        </template>
+        <template #header>
+          <slot name="header" :label="item.label" :prop="item.prop">{{ item.label }}</slot>
+        </template>
+      </el-table-column>
     </el-table>
     <div class="page">
       <el-pagination

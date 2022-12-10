@@ -60,11 +60,11 @@ const layoutRoutes: RouteRecordRaw[] = [
         ]
       },
       {
-        path: '/business/business_message',
-        name: 'BusinessMessage',
-        component: () => import('@/pages/business/BusinessMessage.vue'),
+        path: '/business/tables',
+        name: 'Tables',
+        component: () => import('@/pages/business/Tables.vue'),
         meta: {
-          title: '评论管理',
+          title: '动态表格',
           icon: markRaw(Icons['Setting'])
         }
       },
