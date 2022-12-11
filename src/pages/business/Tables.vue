@@ -67,7 +67,7 @@ const handleSearch = async (done: () => void) => {
       </el-checkbox-group>
     </div>
     <div class="content">
-      <CommonTable
+      <CoTable
         v-model:tableData="tableData"
         v-model:tableHeader="tableHeader"
         v-model:tableCondition="tableCondition"
@@ -82,7 +82,7 @@ const handleSearch = async (done: () => void) => {
             <span>操作2</span>
           </span>
         </template>
-      </CommonTable>
+      </CoTable>
     </div>
   </div>
 </template>

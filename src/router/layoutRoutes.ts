@@ -69,6 +69,15 @@ const layoutRoutes: RouteRecordRaw[] = [
         }
       },
       {
+        path: '/business/forms',
+        name: 'Forms',
+        component: () => import('@/pages/business/Forms.vue'),
+        meta: {
+          title: '动态表单',
+          icon: markRaw(Icons['Setting'])
+        }
+      },
+      {
         path: '/business/international',
         name: 'International',
         component: () => import('@/pages/business/International.vue'),

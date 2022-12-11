@@ -63,7 +63,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="common-table">
+  <div class="co-table">
     <div class="search">
       <div class="search-left">
         <template
@@ -131,7 +131,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.common-table {
+.co-table {
   height: 100%;
   display: flex;
   flex-direction: column;
