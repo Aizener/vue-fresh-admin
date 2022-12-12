@@ -10,7 +10,6 @@ const {
 }>();
 
 watch(code, async () => {
-  console.log(111)
   await nextTick();
   Prism.highlightAll();
 }, { immediate: true });
