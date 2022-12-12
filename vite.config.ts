@@ -8,6 +8,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import eslint from 'vite-plugin-eslint';
 import autoprefixer from 'autoprefixer';
 import { resolve } from 'path';
+import { prismjsPlugin } from 'vite-plugin-prismjs';
 
 const pathSrc = resolve(__dirname, './src');
 const pathRoot = resolve(__dirname, '.');
@@ -61,6 +62,12 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true,
+    }),
+    prismjsPlugin({
+      "languages": ["javascript", "css", "markup", "json"],
+      "plugins": ["line-numbers"],
+      "theme": "dark",
+      "css": true
     }),
     eslint()
   ]
