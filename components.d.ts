@@ -8,19 +8,17 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Bar: typeof import('./src/components/Bar.vue')['default']
+    CoCode: typeof import('./src/components/CoCode.vue')['default']
     CoForm: typeof import('./src/components/CoForm.vue')['default']
-    CommonTable: typeof import('./src/components/CommonTable.vue')['default']
     CoTable: typeof import('./src/components/CoTable.vue')['default']
     CoTips: typeof import('./src/components/CoTips.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCalendar: typeof import('element-plus/es')['ElCalendar']
-    ElCard: typeof import('element-plus/es')['ElCard']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
-    ElDivider: typeof import('element-plus/es')['ElDivider']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
@@ -30,20 +28,12 @@ declare module '@vue/runtime-core' {
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElOption: typeof import('element-plus/es')['ElOption']
-    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
-    ElTable: typeof import('element-plus/es')['ElTable']
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
-    ElTabPane: typeof import('element-plus/es')['ElTabPane']
-    ElTabs: typeof import('element-plus/es')['ElTabs']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-  }
-  export interface ComponentCustomProperties {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

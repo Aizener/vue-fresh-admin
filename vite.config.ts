@@ -65,8 +65,8 @@ export default defineConfig({
     }),
     prismjsPlugin({
       "languages": ["javascript", "css", "markup", "json"],
-      "plugins": ["line-numbers"],
-      "theme": "dark",
+      "plugins": ["line-numbers", "show-language", "copy-to-clipboard"],
+      "theme": "okaidia",
       "css": true
     }),
     eslint()

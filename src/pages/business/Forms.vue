@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Prism from 'prismjs';
 const form = $ref([
   { type: 'input', prop: 'name', label: '名称' },
   { type: 'input', prop: 'title', label: '标题' },
@@ -34,14 +33,13 @@ const rules = $ref({
   name: [{ required: true, message: '请输入名称', trigger: ['blur', 'change'] }],
   title: [{ required: true, message: '请输入标题', trigger: ['blur', 'change'] }]
 });
-const html = Prism.highlight(JSON.stringify(model), Prism.languages.json, 'json');
 </script>
 
 <template>
   <div class="forms">
     <div class="operate">
-      <p class="title">对应的JSON对象</p>
-      <pre><code class="language-json" v-html="html"></code></pre>
+      <CoTips title="表单值" content="对应的JSON对象"></CoTips>
+      <CoCode lang="json" :code="model"></CoCode>
     </div>
     <div class="content">
       <CoForm :form="form" :model="model" :rules="rules" :column="true">
@@ -55,9 +53,9 @@ const html = Prism.highlight(JSON.stringify(model), Prism.languages.json, 'json'
   display: flex;
   .operate {
     flex: 1;
+    border-right: 1px solid #eee;
+    padding-right: 15px;
     pre {
-      width: 300px;
-      height: 300px;
       white-space: pre-wrap;
       code {
       width: 300px;

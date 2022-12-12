@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { FormInstance, FormRules } from 'element-plus';
+import { isValidComponentSize } from 'element-plus/es/utils';
+import { valid } from 'semver';
 const {
   form,
   model,
@@ -12,7 +14,7 @@ const {
   column: boolean
 }>();
 
-const formRef = $ref();
+const formRef = $ref<FormInstance>();
 
 const getLabelWidth = (item: any) => {
   return item.labelWidth ? item.labelWidth : '100px';
@@ -31,12 +33,26 @@ const getPlaceholderTitle = (item: any) => {
   return `请${msg}${label}`
 }
 
-const validate = () => {
-  console.log(formRef)
+const validate = async () => {
+  const isValid = await formRef!.validate().catch(() => false);
+  return isValid;
+}
+const validateField = async (field: string) => {
+  const isValid = await formRef!.validateField(field).catch(() => false);
+  return isValid;
+}
+const scrollToField = async (field: string) => {
+  formRef!.scrollToField(field);
+}
+const resetFields = async () => {
+  formRef!.resetFields();
+}
+const clearValidate = async () => {
+  formRef!.clearValidate();
 }
 
 const handleSubmit = async () => {
-  const isValid = await (formRef as FormInstance).validate().catch(() => false);
+  const isValid = await validate();
   console.log(isValid)
 }
 const handleCancel = () => {
@@ -44,7 +60,11 @@ const handleCancel = () => {
 }
 
 defineExpose([
-  validate
+  validate,
+  validateField,
+  resetFields,
+  scrollToField,
+  clearValidate
 ]);
 </script>
 
