@@ -4,6 +4,8 @@ import { echarts } from '@/utils/useEcharts';
 import pkg from '_/package.json';
 import { useDebounceFn } from '@vueuse/core'
 import { EChartsType } from 'echarts/core';
+import Driver from 'driver.js';
+import 'driver.js/dist/driver.min.css';
 
 const today = $ref(new Date());
 const dateList = Array<DayType>(
@@ -102,6 +104,47 @@ const initBarCharts = () => {
   };
   barCharts.setOption(options);
 }
+
+const initHelper = async () => {
+  const driver = new Driver({
+    className: 'c-driver',
+    doneBtnText: '我知道了',
+    closeBtnText: '关闭',
+    nextBtnText: '下一步',
+    prevBtnText: '上一步'
+  });
+  // Define the steps for introduction
+  driver.defineSteps([
+    {
+      element: '#aside',
+      popover: {
+        className: 'step1',
+        title: '侧边栏',
+        description: '侧边栏主要用于切换页面所用',
+        position: 'right'
+      }
+    },
+    {
+      element: '#header',
+      popover: {
+        title: '顶部栏',
+        description: '顶部栏用于显示用户或者部分系统设置',
+        position: 'bottom'
+      }
+    },
+    {
+      element: '#tab-router',
+      popover: {
+        title: '标签栏',
+        description: '标签栏主要用于记录选择过的菜单',
+        position: 'bottom'
+      }
+    }
+  ]);
+  setTimeout(() => {
+    driver.start();
+  });
+}
 onMounted(() => {
   initLineCharts();
   initBarCharts();
@@ -117,7 +160,7 @@ onMounted(() => {
         </div>
         <p>帮助中心</p>
         <span>
-          点击<span class="button">引导</span>将出现站点的使用帮助
+          点击<span class="button" @click="initHelper">引导</span>将出现站点的使用帮助
         </span>
       </div>
       <div class="info-site--block">
@@ -335,4 +378,5 @@ onMounted(() => {
     }
   }
 }
+
 </style>

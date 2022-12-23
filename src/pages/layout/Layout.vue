@@ -7,18 +7,20 @@ import TabRouter from './TabRouter.vue';
 
 <template>
   <el-container>
-    <el-aside>
+    <el-aside id="aside">
       <Aside />
     </el-aside>
     <el-container>
-      <el-header><Header /></el-header>
+      <el-header id="header"><Header /></el-header>
       <el-main>
-        <TabRouter />
-        <router-view v-slot="{ Component }">
-          <keep-alive>
-            <component :is="Component" />
-          </keep-alive>
-        </router-view>
+        <TabRouter id="tab-router" />
+        <div id="main">
+          <router-view v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </router-view>
+        </div>
       </el-main>
     </el-container>
   </el-container>

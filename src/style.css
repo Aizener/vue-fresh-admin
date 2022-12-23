@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  overflow-x: hidden;
+}
 ul li {
   list-style: none;
 }
@@ -32,4 +35,16 @@ a.co-link {
 }
 a.co-link:hover {
   text-decoration: underline;
+}
+
+
+
+.c-driver button {
+  color: #666;
+  padding: 7px 15px !important;
+  border: none !important;
+  background-color: #eee !important;
+}
+.c-driver.step1 {
+  transform: translateY(50%);
 }
