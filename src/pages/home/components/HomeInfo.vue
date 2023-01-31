@@ -289,7 +289,7 @@ onMounted(() => {
         font-size: 16px;
         margin-top: 8px;
         &.button {
-          color: #409eff;
+          color: var(--co-primary-color);;
           margin: 0 3px;
           font-weight: bold;
           cursor: pointer;

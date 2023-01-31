@@ -37,7 +37,7 @@ const {
     top: 0;
     width: 5px;
     height: 100%;
-    background-color: #409eff;
+    background-color: var(--co-primary-color);
   }
   
   .title {

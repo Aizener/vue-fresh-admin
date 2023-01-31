@@ -60,7 +60,7 @@
     </div>
     <div class="card">
       <div class="card-head">
-        <el-icon size="20px" color="green"><HelpFilled /></el-icon>
+        <el-icon size="20px" color="rgb(81, 69, 159)"><HelpFilled /></el-icon>
         <span>动漫数量</span>
       </div>
       <div class="card-content">
