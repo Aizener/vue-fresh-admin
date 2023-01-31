@@ -1,16 +1,17 @@
-# Vue 3 + TypeScript + Vite
+### 关于vue-fresh-admin介绍
+这是一个基于Vue3练手的一个后台管理项目，基于实验性特性：[响应性语法糖](https://cn.vuejs.org/guide/extras/reactivity-transform.html#reactivity-transform)来编写。  
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+对于该项目的命名，重点在于`fresh`这个词： 
+该词作形容词时意为"新鲜的；清新的；淡水的；无经验的"，以此来表达这个项目的简洁性。
 
-## Recommended IDE Setup
+### 计划
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+计划是前后端一起做的，但目前只做了一部分的前端，后端尚未开始（本打算使用nestjs开发），剩下工作在筹备中...
 
-## Type Support For `.vue` Imports in TS
+### 三省吾身
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+1. 感觉CompositionAPI的写法不熟练，写不出很具有复用性的代码；
+2. 感觉项目的目录结构设计的不合理；
+3. ...
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
