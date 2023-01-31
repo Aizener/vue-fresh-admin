@@ -5,7 +5,10 @@ export const useMainStore = defineStore('main', {
     return {
       version: '0.0.1',
       collapse: false,
-      locale: 'zhCn'
+      locale: 'zhCn',
+      showDrawer: false,
+      theme: 'rgb(75, 64, 147)',
+      viewType: 'default'
     }
   },
   actions: {
@@ -14,6 +17,6 @@ export const useMainStore = defineStore('main', {
     }
   },
   persist: {
-    // paths: []
+    paths: ['version', 'collapse', 'locale', 'theme', 'viewType']
   }
 });

@@ -262,7 +262,7 @@ onMounted(() => {
       padding: 15px;
       box-shadow: 0 0 3px #ddd;
       border-radius: 5px;
-      background-color: rgb(252, 251, 255);
+      background-color: var(--co-bg-color-block);
       margin-top: 15px;
       &:first-child {
         margin: 0;
@@ -277,7 +277,7 @@ onMounted(() => {
       flex-direction: column;
       border-radius: 5px;
       box-shadow: 0 0 3px #ddd;
-      background-color: rgb(252, 251, 255);
+      background-color: var(--co-bg-color-block);
       position: relative;
       p {
         color: #333;

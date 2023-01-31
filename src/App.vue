@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import useTheme from '@/utils/theme';
+const theme = useTheme();
 </script>
 
 <template>
-  <div id="container" class="container">
+  <div
+    id="container"
+    class="container"
+    :style="theme"
+  >
     <router-view></router-view>
   </div>
 </template>

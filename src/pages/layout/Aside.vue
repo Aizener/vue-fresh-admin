@@ -46,7 +46,7 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
     width: 240px;
     height: 100%;
     border-right-color: #eee;
-    background-color: rgb(246, 247, 255);
+    background-color: var(--co-menu-bg);
     &.el-menu--collapse {
       width: auto;
     }

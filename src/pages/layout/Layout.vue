@@ -2,7 +2,7 @@
 import Aside from './Aside.vue';
 import Header from './Header.vue';
 import TabRouter from './TabRouter.vue';
-
+import Drawer from './Drawer.vue';
 </script>
 
 <template>
@@ -24,6 +24,7 @@ import TabRouter from './TabRouter.vue';
       </el-main>
     </el-container>
   </el-container>
+  <Drawer />
 </template>
 
 <style lang="scss" scoped>
@@ -36,7 +37,7 @@ import TabRouter from './TabRouter.vue';
   .el-header {
     border-bottom: none;
     border-bottom: 1px solid #eee;
-    background-color: rgb(246, 247, 255);
+    background-color: var(--co-menu-bg);
   }
   .el-main {
     padding-top: 50px;
