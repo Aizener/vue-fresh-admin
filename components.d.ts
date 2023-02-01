@@ -13,7 +13,6 @@ declare module '@vue/runtime-core' {
     CoTable: typeof import('./src/components/CoTable.vue')['default']
     CoTips: typeof import('./src/components/CoTips.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
-    ElButtno: typeof import('element-plus/es')['ElButtno']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElCard: typeof import('element-plus/es')['ElCard']

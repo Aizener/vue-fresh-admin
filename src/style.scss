@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: hidden;
+}
+ul li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(186, 187, 215);
+}
+::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+
+a.co-link {
+  color: var(--co-primary-color);;
+  margin: 0 3px;
+}
+a.co-link:hover {
+  text-decoration: underline;
+}
+
+html {
+  --co-menu-bg: rgb(246, 247, 255);
+}
+html.dark {
+  --co-menu-bg: var(--el-bg-color);
+}
+
+.c-driver button {
+  color: #666;
+  padding: 7px 15px !important;
+  border: none !important;
+  background-color: #eee !important;
+}
+.c-driver.step1 {
+  transform: translateY(50%);
+}
