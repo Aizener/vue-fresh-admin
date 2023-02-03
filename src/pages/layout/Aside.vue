@@ -13,14 +13,16 @@ const mainStore = useMainStore();
 const routerStore = useRouterStore();
 
 const { currentRoute } = storeToRefs(routerStore);
-const getMenu = (routes: RouteRecordRaw[]): Menu => {
-  return routes.map(item => ({
-    index: item.path,
-    title: item.meta?.title,
-    path: item.path,
-    icon: item.meta?.icon,
-    children: item.children ? getMenu(item.children) : []
-  } as MenuItem));
+const getMenu = (routes: RouteRecordRaw[], pPath = ''): Menu => {
+  return routes.map(item => {
+    return {
+      index: `${pPath}/${item.path}`,
+      title: item.meta?.title,
+      path: item.path,
+      icon: item.meta?.icon,
+      children: item.children ? getMenu(item.children, `${pPath ? `${pPath}/${item.path}` : item.path}`) : []
+    } as MenuItem;
+  });
 }
 const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
 </script>

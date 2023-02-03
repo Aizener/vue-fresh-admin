@@ -20,7 +20,7 @@ const layoutRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/business/nesting1.vue',
+        path: 'nesting1',
         name: 'Nesting1Business',
         component: () => import('@/pages/business/nesting/nesting1.vue'),
         meta: {
@@ -29,7 +29,7 @@ const layoutRoutes: RouteRecordRaw[] = [
         },
         children: [
           {
-            path: '/business/nesting1-1.vue',
+            path: 'nesting1-1',
             name: 'Nesting11Business',
             component: () => import('@/pages/business/nesting/nesting1-1.vue'),
             meta: {
@@ -38,7 +38,7 @@ const layoutRoutes: RouteRecordRaw[] = [
             },
             children: [
               {
-                path: '/business/nesting1-1-1.vue',
+                path: 'nesting1-1-1',
                 name: 'Nesting111Business',
                 component: () => import('@/pages/business/nesting/nesting1-1-1.vue'),
                 meta: {
@@ -49,7 +49,7 @@ const layoutRoutes: RouteRecordRaw[] = [
             ]
           },
           {
-            path: '/business/nesting1-2.vue',
+            path: 'nesting1-2',
             name: 'Nesting12Business',
             component: () => import('@/pages/business/nesting/nesting1-2.vue'),
             meta: {
@@ -60,7 +60,7 @@ const layoutRoutes: RouteRecordRaw[] = [
         ]
       },
       {
-        path: '/business/tables',
+        path: 'tables',
         name: 'Tables',
         component: () => import('@/pages/business/Tables.vue'),
         meta: {
@@ -69,7 +69,7 @@ const layoutRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: '/business/forms',
+        path: 'forms',
         name: 'Forms',
         component: () => import('@/pages/business/Forms.vue'),
         meta: {
@@ -78,11 +78,20 @@ const layoutRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: '/business/international',
+        path: 'international',
         name: 'International',
         component: () => import('@/pages/business/International.vue'),
         meta: {
           title: '国际化',
+          icon: markRaw(Icons['Setting'])
+        }
+      },
+      {
+        path: 'notfound',
+        name: 'NotFoundComp',
+        component: () => import('@/pages/business/NotFound.vue'),
+        meta: {
+          title: '404页面',
           icon: markRaw(Icons['Setting'])
         }
       }
@@ -97,30 +106,11 @@ const layoutRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/assets/assets_icon',
+        path: 'assets_icon',
         name: 'IconAssets',
         component: () => import('@/pages/assets/IconAssets.vue'),
         meta: {
           title: '图标组件',
-          icon: markRaw(Icons['Setting'])
-        }
-      }
-    ]
-  },
-  {
-    path: '/analysis',
-    name: 'Analysis',
-    meta: {
-      title: '数据分析',
-      icon: markRaw(Icons['Odometer'])
-    },
-    children: [
-      {
-        path: '/assets/assets_manage',
-        name: 'PlatformSettings',
-        component: () => import('@/pages/system/PlatformSettings.vue'),
-        meta: {
-          title: '平台设置',
           icon: markRaw(Icons['Setting'])
         }
       }
@@ -133,10 +123,9 @@ const layoutRoutes: RouteRecordRaw[] = [
       title: '系统设置',
       icon: markRaw(Icons['SwitchButton'])
     },
-    redirect: '/system',
     children: [
       {
-        path: '/system/platform_settings',
+        path: 'platform_settings',
         name: 'PlatformSettings',
         component: () => import('@/pages/system/PlatformSettings.vue'),
         meta: {
@@ -145,7 +134,7 @@ const layoutRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: '/system/role_settings',
+        path: 'role_settings',
         name: 'RoleSettings',
         component: () => import('@/pages/system/RoleSettings.vue'),
         meta: {
