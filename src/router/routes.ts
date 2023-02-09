@@ -10,6 +10,11 @@ const routes: RouteRecordRaw[] = [
     children: layoutRoutes
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/pages/Login.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/pages/NotFound.vue')
