@@ -38,7 +38,8 @@ type MainState = {
   locale: string,
   showDrawer: boolean,
   theme: string,
-  viewType: 'default' | 'dark'
+  viewType: 'default' | 'dark',
+  user: null | Record<string, unknown>
 }
 
 type MenuItem = {

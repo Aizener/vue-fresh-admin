@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import { useMainStore } from '@/store/main';
+import { useRouter } from 'vue-router';
+import { useMessage } from '@/utils';
+
+const mainStore = useMainStore();
+const router = useRouter();
+const message = useMessage();
 const form = $ref([
   { type: 'input', prop: 'username', label: '用户名' },
-  { type: 'input', prop: 'password', label: '密码' },
+  { type: 'password', prop: 'password', label: '密码' },
 ]);
 const model = $ref<Record<string, unknown>>({
   username: '',
@@ -11,13 +18,42 @@ const rules = $ref({
   username: [{ required: true, message: '请输入用户名', trigger: ['blur', 'change'] }],
   password: [{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]
 });
+
+const handleConfirm = () => {
+  const { username, password } = model;
+  if (username === 'test' && password === 'test') {
+    mainStore.updateValue('user', {
+      type: 'test',
+      username,
+      password
+    });
+    router.push('/');
+    message.success('登录成功');
+  } else if (username === 'admin' && password === 'admin') {
+    mainStore.updateValue('user', {
+      type: 'admin',
+      username,
+      password
+    });
+    router.push('/');
+    message.success('登录成功');
+  } else {
+    message.warning('用户名或密码错误');
+  }
+}
 </script>
 
 <template>
   <div class="login">
     <div class="login-box">
       <h2>用户登录</h2>
-      <CoForm :form="form" :model="model" :rules="rules"></CoForm>
+      <CoForm
+        :form="form"
+        :model="model"
+        :rules="rules"
+        :show-cancel-button="false"
+        @submit="handleConfirm"
+      ></CoForm>
     </div>
   </div>
 </template>

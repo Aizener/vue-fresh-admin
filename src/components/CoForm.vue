@@ -5,11 +5,13 @@ const {
   model,
   rules,
   column = false,
+  showCancelButton = true
 } = defineProps<{
   form: Record<string, any>,
   model: Record<string, any>,
   rules: FormRules,
-  column?: boolean
+  column?: boolean,
+  showCancelButton: boolean
 }>();
 
 const formRef = $ref<FormInstance>();
@@ -103,6 +105,15 @@ defineExpose({
               ></el-input>
             </slot>
           </template>
+          <template v-if="item.type === 'password'">
+            <slot :name="item.prop">
+              <el-input
+                type="password"
+                :placeholder="item.placeholder ? item.placeholder : getPlaceholderTitle(item)"
+                v-model="model[item.prop]"
+              ></el-input>
+            </slot>
+          </template>
           <template v-else-if="item.type === 'select'">
             <slot :name="item.prop">
               <el-select
@@ -168,10 +179,12 @@ defineExpose({
       </div>
     </template>
     <slot name="form-oerpate">
-      <div class="operate">
-        <el-button @click="handleCancel">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">提交</el-button>
-      </div>
+      <slot slot="operate">
+        <div class="operate">
+          <el-button v-if="showCancelButton" @click="handleCancel">取消</el-button>
+          <el-button type="primary" @click="handleSubmit">提交</el-button>
+        </div>
+      </slot>
     </slot>
   </el-form>
 </template>

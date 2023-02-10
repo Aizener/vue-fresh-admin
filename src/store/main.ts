@@ -8,7 +8,8 @@ export const useMainStore = defineStore('main', {
       locale: 'zhCn',
       showDrawer: false,
       theme: 'rgb(75, 64, 147)',
-      viewType: 'default'
+      viewType: 'default',
+      user: null
     }
   },
   actions: {
