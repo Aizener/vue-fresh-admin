@@ -1,0 +1,1 @@
+import{_ as t,o,c as n,x as s,b as _,H as c}from"./index.935b857b.js";const a={},r={class:"nesting"};function d(i,p){const e=c("router-view");return o(),n("div",r,[s(" \u5D4C\u5957\u8DEF\u7531 "),_(e)])}const l=t(a,[["render",d],["__scopeId","data-v-7a4f7a8e"]]);export{l as default};
