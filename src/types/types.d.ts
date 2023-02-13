@@ -39,7 +39,9 @@ type MainState = {
   showDrawer: boolean,
   theme: string,
   viewType: 'default' | 'dark',
-  user: null | Record<string, unknown>
+  user: null | Record<string, unknown>,
+  permission: { menus: Array },
+  layoutRoutes: Array<RouteRecordRaw>
 }
 
 type MenuItem = {
@@ -48,6 +50,14 @@ type MenuItem = {
   path: string,
   icon?: Component,
   children?: Menu
+}
+type RouteItem = {
+  name: string,
+  path: string,
+  icon?: Component,
+  component?: string,
+  meta: Record<string, unknown>,
+  children?: RouteItem[]
 }
 
 type Menu = Array<ExpandObject<MenuItem>>;

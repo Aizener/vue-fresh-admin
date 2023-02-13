@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router';
 import { useMainStore } from '@/store/main';
 
 const mainStore = useMainStore();
@@ -7,6 +8,10 @@ const handleToggleAside = () => {
 }
 const handleShowDrawer = () => {
   mainStore.updateValue('showDrawer', true);
+}
+const handleLogout = async () => {
+  await mainStore.logout();
+  router.push('/login');
 }
 </script>
 
@@ -21,7 +26,21 @@ const handleShowDrawer = () => {
         <div class="avatar">
           <el-icon><User /></el-icon>
         </div>
-        <span>管理员</span>
+        
+        <el-popover
+          placement="bottom"
+          trigger="hover"
+        >
+          <template #reference>
+            <span>管理员</span>
+          </template>
+          <template #default>
+            <div class="user-menu--item" @click="handleLogout">
+              <span>退出登录</span>
+              <el-icon><Promotion /></el-icon>
+            </div>
+          </template>
+        </el-popover>
       </div>
       <div class="info" @click="handleShowDrawer">
         <el-icon><Grid /></el-icon>
@@ -31,6 +50,15 @@ const handleShowDrawer = () => {
 </template>
 
 <style lang="scss" scoped>
+.user-menu--item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 1px solid #999;
+  }
+}
 .header {
   height: 100%;
   display: flex;

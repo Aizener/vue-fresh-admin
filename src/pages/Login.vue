@@ -6,6 +6,7 @@ import { useMessage } from '@/utils';
 const mainStore = useMainStore();
 const router = useRouter();
 const message = useMessage();
+
 const form = $ref([
   { type: 'input', prop: 'username', label: '用户名' },
   { type: 'password', prop: 'password', label: '密码' },
@@ -19,22 +20,14 @@ const rules = $ref({
   password: [{ required: true, message: '请输入密码', trigger: ['blur', 'change'] }]
 });
 
-const handleConfirm = () => {
+const handleConfirm = async () => {
   const { username, password } = model;
   if (username === 'test' && password === 'test') {
-    mainStore.updateValue('user', {
-      type: 'test',
-      username,
-      password
-    });
+    await mainStore.login({ username, password });
     router.push('/');
     message.success('登录成功');
   } else if (username === 'admin' && password === 'admin') {
-    mainStore.updateValue('user', {
-      type: 'admin',
-      username,
-      password
-    });
+    await mainStore.login({ username, password });
     router.push('/');
     message.success('登录成功');
   } else {
@@ -74,7 +67,7 @@ const handleConfirm = () => {
     border-radius: 6px;
     padding: 50px 60px 50px 35px;
     box-shadow: 0 0 15px #ccc;
-    background-color: rgba(246, 247, 255, .3);
+    background-color: rgba(246, 247, 255, .5);
   }
 }
 </style>
