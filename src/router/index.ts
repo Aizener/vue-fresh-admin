@@ -65,19 +65,17 @@ export const initRoutes = async () => {
     router.addRoute('Layout', route);
     return route;
   });
-  router = _createRouter(routes);
-  router.options.routes = routes;
-  return routes;
-}
-
-initRoutes().then(() => {
   router.addRoute({
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/pages/NotFound.vue')
   });
-  console.log(router.getRoutes());
-});
+  router = _createRouter(routes);
+  router.options.routes = router.getRoutes();
+  return routes;
+}
+
+initRoutes();
 
 let _isInitRoute = false;
 router.beforeEach(async (to, from, next) => {

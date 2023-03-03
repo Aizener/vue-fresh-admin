@@ -11,14 +11,13 @@ const routes = router.getRoutes();
 // const menuRoutes = routes.find(route => route.name === 'Layout')?.children;
 const mainStore = useMainStore();
 const routerStore = useRouterStore();
-console.log(mainStore.layoutRoutes)
 const menuRoutes = mainStore.layoutRoutes;
 
 const { currentRoute } = storeToRefs(routerStore);
 const getMenu = (routes: RouteRecordRaw[], pPath = ''): Menu => {
   return routes.map(item => {
     return {
-      index: `${pPath}/${item.path}`,
+      index: `${pPath}${pPath ? '/' : ''}${item.path}`,
       title: item.meta?.title,
       path: item.path,
       icon: item.meta?.icon,
