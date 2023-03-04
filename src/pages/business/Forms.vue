@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { useMainStore } from '@/store/main';
 import { Rule } from 'async-validator';
 import { FormInstance } from 'element-plus';
 
+const mainStore = useMainStore();
 const form = $ref([
   { type: 'input', prop: 'name', label: '名称' },
   { type: 'input', prop: 'title', label: '标题' },
@@ -95,7 +97,7 @@ const handleSubmitAddForm = (isValid: boolean) => {
       <div class="add">
         <el-button type="primary" @click="dialogVisible = true">新增字段</el-button>
       </div>
-      <CoForm :form="form" :model="model" :rules="rules" :column="true"></CoForm>
+      <CoForm :form="form" :model="model" :rules="rules" :column="!mainStore.isMobile"></CoForm>
     </div>
     <el-dialog
       v-model="dialogVisible"

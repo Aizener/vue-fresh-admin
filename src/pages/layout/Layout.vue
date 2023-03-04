@@ -3,17 +3,22 @@ import Aside from './Aside.vue';
 import Header from './Header.vue';
 import TabRouter from './TabRouter.vue';
 import Drawer from './Drawer.vue';
+import { useMainStore } from '@/store/main';
+
+const mainStore = useMainStore();
 </script>
 
 <template>
   <el-container>
-    <el-aside id="aside">
-      <Aside />
-    </el-aside>
-    <el-container>
-      <el-header id="header"><Header /></el-header>
-      <el-main>
+    <template v-if="mainStore.isMobile">
+      <div class="page-top">
+        <el-header>
+          <Header />
+        </el-header>
+        <Aside />
         <TabRouter id="tab-router" />
+      </div>
+      <el-main>
         <div id="main">
           <router-view v-slot="{ Component }">
             <keep-alive>
@@ -22,7 +27,25 @@ import Drawer from './Drawer.vue';
           </router-view>
         </div>
       </el-main>
-    </el-container>
+    </template>
+    <template v-else>
+      <el-aside id="aside">
+        <Aside />
+      </el-aside>
+      <el-container>
+        <el-header id="header"><Header /></el-header>
+        <el-main>
+          <TabRouter id="tab-router" />
+          <div id="main">
+            <router-view v-slot="{ Component }">
+              <keep-alive>
+                <component :is="Component" />
+              </keep-alive>
+            </router-view>
+          </div>
+        </el-main>
+      </el-container>
+    </template>
   </el-container>
   <Drawer />
 </template>

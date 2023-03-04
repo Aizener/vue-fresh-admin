@@ -5,15 +5,9 @@ import { storeToRefs } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
 import AsideMenu from './AsideMenu.vue';
 
-const route = useRoute();
-const router = useRouter();
-const routes = router.getRoutes();
-// const menuRoutes = routes.find(route => route.name === 'Layout')?.children;
 const mainStore = useMainStore();
 const routerStore = useRouterStore();
 const menuRoutes = mainStore.layoutRoutes;
-console.log(menuRoutes)
-
 const { currentRoute } = storeToRefs(routerStore);
 const getMenu = (routes: RouteRecordRaw[], pPath = ''): Menu => {
   return routes.map(item => {
@@ -37,6 +31,7 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
       active-text-color="var(--co-primary-color)"
       :default-active="currentRoute.path"
       :collapse="mainStore.collapse"
+      :mode="mainStore.isMobile ? 'horizontal' : 'vertical'"
     >
       <AsideMenu :menu="menu"></AsideMenu>
     </el-menu>

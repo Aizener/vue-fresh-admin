@@ -1,0 +1,94 @@
+@media screen and (max-width: 640px) {
+  ::-webkit-scrollbar {
+    height: 2px;
+  }
+  .el-container {
+    width: 100%;
+    height: auto !important;
+    min-height: 100%;
+    flex-direction: column !important;
+    .aside {
+      width: 100%;
+      border-top: 1px solid #eee;
+      .el-menu {
+        width: 100% !important;
+        overflow-x: auto;
+      }
+    }
+    .el-header {
+      width: 100%;
+      padding: 0;
+      .header {
+        justify-content: flex-end;
+      }
+      .header-left {
+        display: none;
+      }
+    }
+    .el-main {
+      padding: 15px !important;
+      position: relative;
+    }
+  }
+
+  .router-tab {
+    position: relative !important;
+  }
+  .page {
+    height: 35px !important;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    .el-pagination {
+      width: 100%;
+    }
+  }
+
+  .card-list {
+    flex-wrap: wrap;
+    .card {
+      flex: auto !important;
+      width: 50%;
+      margin: 10px !important;
+    }
+  }
+  .trend {
+    flex-wrap: wrap;
+  }
+  .forms {
+    flex-wrap: wrap;
+  }
+  .international {
+    .el-card {
+      min-width: 100% !important;
+    }
+    .feature {
+      .item {
+        flex: auto !important;
+        width: 100%;
+        margin-bottom: 15px !important;
+      }
+      flex-wrap: wrap;
+    }
+  }
+  .not-found {
+    .box {
+      width: 100% !important;
+      .content {
+        width: 100% !important;
+        padding: 0 30px !important;
+        .title {
+          font-size: 110px !important;
+        }
+        .title:nth-of-type(1) {
+          margin-right: 15px;
+        }
+        .title:nth-of-type(2) {
+          margin-left: 15px;
+        }
+        .light {
+          margin: 0px !important;
+        }
+      }
+    }
+  }
+}

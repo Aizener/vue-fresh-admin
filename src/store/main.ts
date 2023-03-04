@@ -1,5 +1,12 @@
 import { initRoutes } from '@/router';
 import { defineStore } from 'pinia';
+import { useBreakpoints } from '@vueuse/core';
+
+const breakpoints = useBreakpoints({
+  tablet: 640,
+  laptop: 1024,
+  desktop: 1280,
+});
 
 const baseMenu: RouteItem[] = [
   {
@@ -110,7 +117,8 @@ export const useMainStore = defineStore('main', {
       viewType: 'default',
       user: null,
       permission: { menus: [] },
-      layoutRoutes: []
+      layoutRoutes: [],
+      isMobile: breakpoints.isSmaller('tablet'),
     }
   },
   actions: {

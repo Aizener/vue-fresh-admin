@@ -41,7 +41,8 @@ type MainState = {
   viewType: 'default' | 'dark',
   user: null | Record<string, unknown>,
   permission: { menus: Array },
-  layoutRoutes: Array<RouteRecordRaw>
+  layoutRoutes: Array<RouteRecordRaw>,
+  isMobile: boolean
 }
 
 type MenuItem = {
