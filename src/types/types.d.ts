@@ -48,6 +48,7 @@ type MenuItem = {
   index: string,
   title: string,
   path: string,
+  isLink: boolean,
   icon?: Component,
   children?: Menu
 }

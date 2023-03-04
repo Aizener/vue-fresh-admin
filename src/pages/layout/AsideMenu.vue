@@ -1,7 +1,18 @@
 <script setup lang="ts">
+import { RouteRecordRaw } from 'vue-router';
+
+const router = useRouter();
 const { menu } = defineProps<{
   menu: Menu
 }>();
+
+const handleClickItem = (item: MenuItem) => {
+  if (item.isLink) {
+    window.open(item.index);
+  } else {
+    router.push(item.index);
+  }
+}
 </script>
 
 <template>
@@ -23,6 +34,7 @@ const { menu } = defineProps<{
     <el-menu-item
       v-else
       :index="item.index"
+      @click="handleClickItem(item)"
     >
       <el-icon>
         <component :is="item.icon"></component>

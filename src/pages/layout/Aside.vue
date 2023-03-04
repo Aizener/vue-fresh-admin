@@ -12,13 +12,15 @@ const routes = router.getRoutes();
 const mainStore = useMainStore();
 const routerStore = useRouterStore();
 const menuRoutes = mainStore.layoutRoutes;
+console.log(menuRoutes)
 
 const { currentRoute } = storeToRefs(routerStore);
 const getMenu = (routes: RouteRecordRaw[], pPath = ''): Menu => {
   return routes.map(item => {
     return {
-      index: `${pPath}${pPath ? '/' : ''}${item.path}`,
+      index: item.meta?.isLink ? item.path : `${pPath}${pPath ? '/' : ''}${item.path}`,
       title: item.meta?.title,
+      isLink: item.meta?.isLink,
       path: item.path,
       icon: item.meta?.icon,
       children: item.children ? getMenu(item.children, `${pPath ? `${pPath}/${item.path}` : item.path}`) : []
@@ -33,7 +35,6 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
     <el-menu
       text-color="#666"
       active-text-color="var(--co-primary-color)"
-      :router="true"
       :default-active="currentRoute.path"
       :collapse="mainStore.collapse"
     >

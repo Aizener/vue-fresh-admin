@@ -79,6 +79,23 @@ const baseMenu: RouteItem[] = [
         meta: { title: '图标组件', icon: 'Setting' }
       }
     ]
+  },
+  {
+    path: '/links',
+    name: 'Links',
+    meta: { title: '外部链接', icon: 'Odometer' },
+    children: [
+      {
+        name: 'GithubLink',
+        path: 'https://github.com',
+        meta: { title: '跳转Github', icon: 'Odometer', isLink: true },
+      },
+      {
+        name: 'RepoLink',
+        path: 'https://github.com/Aizener/vue-fresh-admin',
+        meta: { title: '项目仓库地址', icon: 'Odometer', isLink: true },
+      },
+    ]
   }
 ];
 
@@ -109,8 +126,8 @@ export const useMainStore = defineStore('main', {
       this.updateValue('permission', {
         menus: user.username === 'test' ? baseMenu : [...baseMenu, { path: '/system', name: 'System', meta: { title: '系统设置', icon: 'SwitchButton' }}]
       });
-      const routes = await initRoutes();
-      this.updateValue('layoutRoutes', routes);
+      await initRoutes();
+      this.updateValue('layoutRoutes', this.permission.menus);
     },
     async logout() {
       this.updateValue('user', null);

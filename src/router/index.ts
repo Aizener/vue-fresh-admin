@@ -55,6 +55,9 @@ export const initRoutes = async () => {
     return;
   }
   const routes = menus.map((menu: RouteItem) => {
+    if (menu.meta.isLink) {
+      return;
+    }
     const route: RouteRecordRaw = {
       path: menu.path,
       name: menu.name,
@@ -64,7 +67,7 @@ export const initRoutes = async () => {
     }
     router.addRoute('Layout', route);
     return route;
-  });
+  }).filter((menu: RouteItem) => menu);
   router.addRoute({
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
@@ -88,7 +91,6 @@ router.beforeEach(async (to, from, next) => {
       if (_isInitRoute) {
         next();
       } else {
-        await nextTick();
         _isInitRoute = true;
         next({ ...to, replace: true });
       }
