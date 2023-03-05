@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { RouteRecordRaw } from 'vue-router';
-
 const router = useRouter();
 const { menu } = defineProps<{
-  menu: Menu
+  menu: Menu,
 }>();
 
-const handleClickItem = (item: MenuItem) => {
+const handleClickItem = async (item: MenuItem) => {
   if (item.isLink) {
     window.open(item.index);
   } else {

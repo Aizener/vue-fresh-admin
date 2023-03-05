@@ -29,6 +29,7 @@ const handleChangeThemeType = (val: string) => {
     v-model="showDrawer"
     title="设置"
     direction="rtl"
+    :size="mainStore.isMobile ? '300px' : '500px'"
     :before-close="handleBeforeClose"
   >
     <div class="row view">

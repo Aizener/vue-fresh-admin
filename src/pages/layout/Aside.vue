@@ -32,6 +32,7 @@ const menu = $ref<Menu>(menuRoutes ? getMenu(menuRoutes) : []);
       :default-active="currentRoute.path"
       :collapse="mainStore.collapse"
       :mode="mainStore.isMobile ? 'horizontal' : 'vertical'"
+      menu-trigger="click"
     >
       <AsideMenu :menu="menu"></AsideMenu>
     </el-menu>
